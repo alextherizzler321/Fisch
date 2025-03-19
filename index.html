@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>MDN Games: A-Frame demo</title>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <a-camera id="camera" position="0 1 4"
+        cursor-visible="false"
+        cursor-scale="2"
+        cursor-color="#red"
+        cursor-opacity="1">
+      </a-camera>
+      
+      <!-- Sky -->
+      <a-sky color="black"></a-sky>
+
+      <!-- 3D Text at the top -->
+      <a-text value="Why did you look here?
+      Space to go up, shift to go down" 
+              position="0 5 -10" 
+              scale="10 10 10"
+              color="#FF0000"
+              align="center"
+              side="double"
+              rotation="0 0 0">
+      </a-text>
+
+      <!-- Torus -->
+      <a-torus position="0.5 0.5 -3" rotation="0 0 0" color="#9D64E2" animation="property: rotation; to: 0 180 0; loop: true; dur: 2000; dir: normal; 
+      keyframes: 0 180 0, 0 0 0; keyframes-duration: 2000, 2000; 
+      keyframes-easing: linear, linear"></a-torus>
+
+      <!-- Sphere -->
+      <a-sphere opacity="1" scale="0.6 0.6 0.6" position="0.5 0.5 -3" rotation="0 0 0" color="#9D64E2"></a-sphere>
+    </a-scene>
+  </body>
+
+  <script>
+    // Get the camera element
+    const camera = document.getElementById('camera');
+
+    // Event listener for keydown events
+    document.addEventListener('keydown', function (event) {
+      const cameraPosition = camera.getAttribute('position');
+
+      if (event.code === 'Space') {
+        // Move camera up when Space is pressed
+        camera.setAttribute('position', { x: cameraPosition.x, y: cameraPosition.y + 1, z: cameraPosition.z });
+      } else if (event.code === 'ShiftLeft' || event.code === 'ShiftRight') {
+        // Move camera down when Shift is pressed
+        camera.setAttribute('position', { x: cameraPosition.x, y: cameraPosition.y - 1, z: cameraPosition.z });
+      }
+    });
+  </script>
+</html>
